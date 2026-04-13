@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Md Salim Akhtar — Geoscientist</title>
+<style>
+  :root {
+    --bg:       #0c1a10;
+    --bg2:      #122018;
+    --bg3:      #1a2e20;
+    --card:     #162a1c;
+    --accent:   #c8861a;
+    --accent2:  #e8a832;
+    --green:    #2d6a4f;
+    --green2:   #3d8a65;
+    --text:     #f0e8d8;
+    --muted:    #9a8a72;
+    --border:   rgba(200,134,26,0.18);
+    --serif:    Georgia, 'Times New Roman', serif;
+    --sans:     'Segoe UI', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GEO TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(200,134,26,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 60px;
+    background: rgba(12,26,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 5% 60px;
+    overflow: hidden;
+  }
+  .hero-geo-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, #0c1a10 0%, #152b1a 40%, #0c1a10 100%);
+    z-index: 0;
+  }
+  .hero-strata {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 260px;
+    z-index: 0;
+    opacity: 0.18;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease both;
+  }
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: normal;
+    line-height: 1.08;
+    color: var(--text);
+    margin-bottom: 20px;
+    animation: fadeUp .7s .1s ease both;
+  }
+  h1.hero-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 36px;
+    animation: fadeUp .7s .2s ease both;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+    animation: fadeUp .7s .3s ease both;
+  }
+  .badge {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+  }
+  .badge.accent { border-color: var(--accent); color: var(--accent); background: rgba(200,134,26,0.08); }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp .7s .4s ease both;
+  }
+  .btn {
+    padding: 11px 28px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all .2s;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0c1a10;
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(240,232,216,0.3);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    z-index: 1;
+    animation: fadeLeft .8s .3s ease both;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 42px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 90px 5%;
+  }
+  section:nth-child(even) { background: var(--bg2); }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: normal;
+    color: var(--text);
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+  h2.section-title span { color: var(--accent); }
+  .divider {
+    width: 52px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 48px;
+    opacity: .7;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 16px; }
+  .about-text p strong { color: var(--text); }
+  .cv-items { display: flex; flex-direction: column; gap: 18px; }
+  .cv-item {
+    padding: 16px 20px;
+    border-left: 2px solid var(--accent);
+    background: rgba(200,134,26,0.05);
+  }
+  .cv-item-year { font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .cv-item-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .cv-item-sub { font-size: 13px; color: var(--muted); }
+
+  /* ── RESEARCH ── */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .research-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 3px;
+    transition: border-color .25s, transform .25s;
+    cursor: default;
+  }
+  .research-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .research-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(200,134,26,0.12);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .research-card h3 {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: normal;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .research-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .research-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .rtag {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: rgba(45,106,79,0.25);
+    color: var(--green2);
+    border-radius: 2px;
+    border: 1px solid rgba(45,106,79,0.3);
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 16px; }
+  .pub-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: start;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    transition: border-color .2s;
+  }
+  .pub-item:hover { border-color: var(--accent); }
+  .pub-year {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--accent);
+    opacity: .5;
+    min-width: 52px;
+    padding-top: 2px;
+  }
+  .pub-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  .pub-authors { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .pub-authors strong { color: var(--accent2); }
+  .pub-journal {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--green2);
+  }
+  .pub-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+  .scopus { background: rgba(200,134,26,0.15); color: var(--accent); border: 1px solid var(--border); }
+
+  /* ── FIELD DIARY ── */
+  .diary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .diary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .diary-card:hover { border-color: var(--green2); }
+  .diary-img {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .diary-body { padding: 18px 20px; }
+  .diary-date { font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .diary-card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .diary-card p { font-size: 13px; color: var(--muted); }
+
+  /* ── COLLABORATION ── */
+  #collaborate {
+    background: linear-gradient(135deg, #122018 0%, #1a3020 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 90px 5%;
+  }
+  #collaborate p { font-size: 16px; color: var(--muted); max-width: 580px; margin: 0 auto 36px; }
+  .collab-areas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 32px auto;
+    max-width: 700px;
+  }
+  .collab-pill {
+    padding: 8px 20px;
+    background: rgba(45,106,79,0.2);
+    border: 1px solid rgba(45,106,79,0.35);
+    color: var(--green2);
+    border-radius: 999px;
+    font-size: 13px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(200,134,26,0.1);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .contact-item-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .contact-item-val { font-size: 13px; color: var(--text); }
+  .contact-item-val a { color: var(--accent); text-decoration: none; }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+  form input, form textarea, form select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 11px 16px;
+    font-size: 14px;
+    font-family: var(--sans);
+    border-radius: 3px;
+    outline: none;
+    transition: border-color .2s;
+    resize: vertical;
+  }
+  form input:focus, form textarea:focus { border-color: var(--accent); }
+  form input::placeholder, form textarea::placeholder { color: var(--muted); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  form button[type="submit"] { align-self: flex-start; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 32px 5%;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .hero-stats { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .pub-item { grid-template-columns: 1fr; }
+    .pub-year { font-size: 13px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#hero">Dr. Md Salim Akhtar</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#diary">Field Diary</a></li>
+    <li><a href="#collaborate">Collaborate</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-geo-bg"></div>
+
+  <!-- SVG strata layers -->
+  <svg class="hero-strata" viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,200 Q200,170 400,190 Q600,210 800,180 Q1000,150 1200,175 Q1350,192 1440,168 L1440,260 L0,260Z" fill="#2d6a4f"/>
+    <path d="M0,220 Q300,198 500,215 Q700,232 900,205 Q1100,178 1300,200 L1440,192 L1440,260 L0,260Z" fill="#1a3d25"/>
+    <path d="M0,240 Q250,228 500,238 Q750,248 1000,230 Q1200,216 1440,232 L1440,260 L0,260Z" fill="#122018"/>
+    <path d="M0,252 Q400,244 800,252 Q1100,258 1440,248 L1440,260 L0,260Z" fill="#c8861a" opacity="0.3"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-label">National Postdoctoral Fellow · ANRF-PDF · IIT Gandhinagar</div>
+    <h1 class="hero-title">Reading the Earth<br>through <em>Rock & Fire</em></h1>
+    <p class="hero-sub">Igneous petrology, ophiolite petrogenesis, and critical mineral systems — tracing the deep history of tectonic plates across the Tethyan realm and beyond.</p>
+    <div class="hero-badges">
+      <span class="badge accent">Ophiolite Petrogenesis</span>
+      <span class="badge">Mafic–Ultramafic Geochemistry</span>
+      <span class="badge">Critical Minerals</span>
+      <span class="badge">SIMS · SHRIMP · LA-ICP-MS</span>
+      <span class="badge">CSIR-UGC NET JRF — AIR 14</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#research" class="btn btn-primary">Explore Research</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">11</div>
+      <div class="stat-lbl">Scopus Papers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8+</div>
+      <div class="stat-lbl">Ophiolite Suites</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">AIR&nbsp;14</div>
+      <div class="stat-lbl">NET JRF Rank</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-label">Background</div>
+  <h2 class="section-title">About <span>&amp;</span> CV</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I am a <strong>National Postdoctoral Fellow (ANRF-PDF)</strong> in the Department of Earth Sciences at IIT Gandhinagar. My work sits at the intersection of igneous petrology, mantle geochemistry, and tectonic reconstruction — with a particular focus on ophiolite complexes as windows into vanished ocean floors.</p>
+      <p>My research integrates field geology, EPMA mineral chemistry, LA-ICP-MS trace element analysis, SIMS/SHRIMP geochronology, and quantitative geochemical modelling (non-modal batch melting, AFC, two-component mixing, inverse modelling) to decipher magma genesis and tectonic setting.</p>
+      <p>Beyond ophiolites I am actively investigating <strong>critical mineral potential</strong> — PGE, Cr, V, Ni, Co — in Indian mafic–ultramafic terranes, and the helium resource potential of Precambrian basement complexes.</p>
+      <p>Key collaborators include <strong>Prof. M. Santosh</strong> (KOCHI Univ./China Univ. Geosciences) and <strong>Dr. M. Ram Mohan</strong> (CSIR-NGRI, Hyderabad). I have undertaken analytical training at GFZ Potsdam (SIMS) and CSIR-NGRI (SHRIMP).</p>
+    </div>
+    <div class="cv-items">
+      <div class="cv-item">
+        <div class="cv-item-year">2023 — present</div>
+        <div class="cv-item-title">National Postdoctoral Fellow (ANRF-PDF)</div>
+        <div class="cv-item-sub">Dept. of Earth Sciences, IIT Gandhinagar, India</div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-item-year">2016 — 2022</div>
+        <div class="cv-item-title">PhD in Geology</div>
+        <div class="cv-item-sub">University of Delhi — Ophiolite petrogenesis, NW Himalaya</div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-item-year">2014 — 2016</div>
+        <div class="cv-item-title">M.Sc. Geology — First Division</div>
+        <div class="cv-item-sub">Hansraj College, University of Delhi</div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-item-year">2011 — 2014</div>
+        <div class="cv-item-title">B.Sc. Geology — First Division</div>
+        <div class="cv-item-sub">Hansraj College, University of Delhi</div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-item-year">Analytical Training</div>
+        <div class="cv-item-title">GFZ Potsdam (SIMS) · CSIR-NGRI (SHRIMP)</div>
+        <div class="cv-item-sub">International isotope geochronology training</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH ── -->
+<section id="research">
+  <div class="section-label">Current Work</div>
+  <h2 class="section-title">Research <span>&amp;</span> Findings</h2>
+  <div class="research-grid">
+
+    <div class="research-card reveal">
+      <div class="research-icon">🪨</div>
+      <h3>Ophiolite Petrogenesis</h3>
+      <p>Reconstructing the tectonic history of the Tethyan Ocean through detailed petrological and geochemical study of ophiolite complexes — Nidar, Karzog, Spontang, Dras, Naga Hills, Manipur, and Andaman — using SSZ discrimination, mantle melting models, and mineral chemistry.</p>
+      <div class="research-tags">
+        <span class="rtag">Nidar Ophiolite</span>
+        <span class="rtag">Supra-subduction Zone</span>
+        <span class="rtag">Mantle Harzburgite</span>
+        <span class="rtag">Forearc Basalt</span>
+      </div>
+    </div>
+
+    <div class="research-card reveal">
+      <div class="research-icon">⚗️</div>
+      <h3>Mantle Source Modelling</h3>
+      <p>Quantitative geochemical modelling of basalt and dolerite genesis from the Nidar Ophiolite Complex — non-modal batch melting, two-component mixing, slab-fluid input estimation, and inverse geochemical modelling using REE systematics and isotopic arrays.</p>
+      <div class="research-tags">
+        <span class="rtag">Non-modal Melting</span>
+        <span class="rtag">Slab Input</span>
+        <span class="rtag">REE Inversion</span>
+        <span class="rtag">Mixing Models</span>
+      </div>
+    </div>
+
+    <div class="research-card reveal">
+      <div class="research-icon">💎</div>
+      <h3>Critical Mineral Systems</h3>
+      <p>Investigating PGE, Cr, V, Ni, and Co enrichment in Indian mafic–ultramafic terranes. Developing a novel MAASL-OD-MOF extraction pipeline for PGE recovery from complex geological matrices, and evaluating helium potential in the Chota Nagpur Granite Gneissic Complex.</p>
+      <div class="research-tags">
+        <span class="rtag">PGE</span>
+        <span class="rtag">Chromite</span>
+        <span class="rtag">Helium Potential</span>
+        <span class="rtag">CGGC</span>
+      </div>
+    </div>
+
+    <div class="research-card reveal">
+      <div class="research-icon">🌡️</div>
+      <h3>Geothermal Systems</h3>
+      <p>Petrological and geochemical characterisation of active geothermal fields in Ladakh — Puga and Panamik — including hydrothermal alteration mineralogy, fluid–rock interaction, and geothermal energy potential assessment integrated with UAV-based thermal mapping.</p>
+      <div class="research-tags">
+        <span class="rtag">Puga Valley</span>
+        <span class="rtag">Panamik</span>
+        <span class="rtag">Hydrothermal</span>
+        <span class="rtag">Ladakh</span>
+      </div>
+    </div>
+
+    <div class="research-card reveal">
+      <div class="research-icon">🕰️</div>
+      <h3>Geochronology &amp; Crustal Evolution</h3>
+      <p>SIMS and SHRIMP U-Pb zircon geochronology of Precambrian basement complexes, linking ophiolite obduction timing to supercontinent assembly and dispersal cycles. Focus on Proterozoic crustal growth across the Indian subcontinent.</p>
+      <div class="research-tags">
+        <span class="rtag">U-Pb Zircon</span>
+        <span class="rtag">SIMS / SHRIMP</span>
+        <span class="rtag">Proterozoic</span>
+        <span class="rtag">Supercontinent</span>
+      </div>
+    </div>
+
+    <div class="research-card reveal">
+      <div class="research-icon">📊</div>
+      <h3>Statistical Geochemistry</h3>
+      <p>Application of multivariate statistics — PCA, LDA, hierarchical clustering, Monte Carlo tectonic discrimination — to large multi-suite ophiolite datasets (330+ samples). Development of publication-quality geochemical visualisations for nine Tethyan ophiolite suites.</p>
+      <div class="research-tags">
+        <span class="rtag">PCA / LDA</span>
+        <span class="rtag">Monte Carlo</span>
+        <span class="rtag">Tethyan Ophiolites</span>
+        <span class="rtag">Multi-suite</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PUBLICATIONS ── -->
+<section id="publications">
+  <div class="section-label">Peer-reviewed Work</div>
+  <h2 class="section-title">Selected <span>Publications</span></h2>
+  <div class="pub-list">
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Mantle source characteristics and slab input during magma genesis of the Nidar Ophiolite Complex, Ladakh Himalaya</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong>, Ram Mohan, M., Santosh, M.</div>
+        <div class="pub-journal">Lithos</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Petrogenesis of cumulate gabbro and gabbronorite from the Nidar Ophiolite Complex: Implications for forearc crustal accretion</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong>, Santosh, M., Ram Mohan, M.</div>
+        <div class="pub-journal">Geological Journal</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Tethyan ophiolites of the Indian subcontinent: Geochemistry, petrogenesis and tectonic implications — A synthesis</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong>, Santosh, M. et al.</div>
+        <div class="pub-journal">Earth-Science Reviews</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Geochemistry and tectonic setting of the Naga Hills Ophiolite, northeast India: Insights from mafic volcanic rocks</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong>, Ram Mohan, M.</div>
+        <div class="pub-journal">Precambrian Research</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2021</div>
+      <div>
+        <div class="pub-title">Boninitic affinity of the Spontang Ophiolite, Ladakh: Evidence from geochemistry of mafic–ultramafic rocks</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong>, Santosh, M., Ram Mohan, M.</div>
+        <div class="pub-journal">Journal of Asian Earth Sciences</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+    <div class="pub-item reveal">
+      <div class="pub-year">2020</div>
+      <div>
+        <div class="pub-title">Geodynamic evolution of the Manipur Ophiolite Complex: Constraints from mineral chemistry and whole-rock geochemistry</div>
+        <div class="pub-authors"><strong>Akhtar, M.S.</strong> et al.</div>
+        <div class="pub-journal">Lithos</div>
+      </div>
+      <span class="pub-badge scopus">Scopus</span>
+    </div>
+
+  </div>
+  <div style="margin-top:28px">
+    <a href="https://www.scopus.com" target="_blank" class="btn btn-outline" style="font-size:12px">View all 11 papers on Scopus ↗</a>
+  </div>
+</section>
+
+<!-- ── FIELD DIARY ── -->
+<section id="diary">
+  <div class="section-label">Field Notes &amp; Updates</div>
+  <h2 class="section-title">Field <span>Diary</span></h2>
+  <div class="diary-grid">
+
+    <div class="diary-card reveal">
+      <div class="diary-img">🏔️</div>
+      <div class="diary-body">
+        <div class="diary-date">Summer 2023 · Ladakh, India</div>
+        <h3>Field Season — Nidar Ophiolite Complex</h3>
+        <p>Sample collection across the mantle section (harzburgite, dunite, chromitite), cumulate sequence, and sheeted dike complex. Structural measurements and outcrop photography for 3D model construction. Altitude: 3,800–4,600 m.</p>
+      </div>
+    </div>
+
+    <div class="diary-card reveal">
+      <div class="diary-img">🔬</div>
+      <div class="diary-body">
+        <div class="diary-date">2023 · GFZ Potsdam, Germany</div>
+        <h3>SIMS Analytical Training</h3>
+        <p>International training in Secondary Ion Mass Spectrometry for U-Pb zircon geochronology at GeoForschungsZentrum Potsdam — one of the world's leading isotope geochemistry facilities.</p>
+      </div>
+    </div>
+
+    <div class="diary-card reveal">
+      <div class="diary-img">⚡</div>
+      <div class="diary-body">
+        <div class="diary-date">2024 · Hyderabad, India</div>
+        <h3>SHRIMP Session at CSIR-NGRI</h3>
+        <p>U-Pb zircon dating using the SHRIMP facility at CSIR-National Geophysical Research Institute in collaboration with Dr. M. Ram Mohan. Results constraining ophiolite obduction age in NW Himalaya.</p>
+      </div>
+    </div>
+
+    <div class="diary-card reveal">
+      <div class="diary-img">🌋</div>
+      <div class="diary-body">
+        <div class="diary-date">2024 · Puga Valley, Ladakh</div>
+        <h3>Geothermal Field Survey — Puga</h3>
+        <p>First-hand sampling of geothermal spring precipitates, hydrothermal alteration zones, and fumarolic deposits in the Puga geothermal field. UAV thermal imaging survey for mapping heat-flow anomalies.</p>
+      </div>
+    </div>
+
+    <div class="diary-card reveal">
+      <div class="diary-img">📄</div>
+      <div class="diary-body">
+        <div class="diary-date">2025 · Manuscript in Progress</div>
+        <h3>NOC Basalt &amp; Dolerite: Mantle Modelling Paper</h3>
+        <p>Finalising a manuscript on slab-fluid input and mantle source heterogeneity during basalt/dolerite genesis in the Nidar Ophiolite. Quantitative REE inversion and two-component isotopic mixing models near complete.</p>
+      </div>
+    </div>
+
+    <div class="diary-card reveal">
+      <div class="diary-img">🌐</div>
+      <div class="diary-body">
+        <div class="diary-date">2025 · Conference Abstract</div>
+        <h3>Goldschmidt 2025 — NOC Back-arc Reinterpretation</h3>
+        <p>Abstract submitted to Goldschmidt presenting a revised back-arc basin interpretation for the Nidar Ophiolite based on multi-proxy geochemical discrimination and comparison with modern supra-subduction zone analogues.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── COLLABORATE ── -->
+<section id="collaborate">
+  <div class="section-label">Open to Opportunities</div>
+  <h2 class="section-title" style="margin-bottom:0">Let's <span>Collaborate</span></h2>
+  <p>I am actively seeking international postdoctoral fellowships, faculty positions, and joint research projects. If your work intersects with any of the areas below, I would welcome a conversation.</p>
+  <div class="collab-areas">
+    <span class="collab-pill">Ophiolite Geochemistry</span>
+    <span class="collab-pill">Critical Minerals</span>
+    <span class="collab-pill">Tethyan Tectonics</span>
+    <span class="collab-pill">Mantle Petrology</span>
+    <span class="collab-pill">Geochronology</span>
+    <span class="collab-pill">Geothermal Energy</span>
+    <span class="collab-pill">PGE Extraction</span>
+    <span class="collab-pill">Helium Resources</span>
+    <span class="collab-pill">SIMS / LA-ICP-MS</span>
+    <span class="collab-pill">Himalayan Geology</span>
+  </div>
+  <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+    <a href="#contact" class="btn btn-primary">Propose Collaboration</a>
+    <a href="mailto:akhtar14.du@gmail.com" class="btn btn-outline">Email Directly</a>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-label">Reach Out</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Location</div>
+          <div class="contact-item-val">Dept. of Earth Sciences, IIT Gandhinagar<br>Palaj, Gandhinagar 382355, Gujarat, India</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val"><a href="mailto:akhtar14.du@gmail.com">akhtar14.du@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🔗</div>
+        <div>
+          <div class="contact-item-label">Academic Profiles</div>
+          <div class="contact-item-val">
+            <a href="https://www.scopus.com" target="_blank">Scopus Profile</a> · 
+            <a href="https://scholar.google.com" target="_blank">Google Scholar</a> · 
+            <a href="https://www.researchgate.net" target="_blank">ResearchGate</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏛️</div>
+        <div>
+          <div class="contact-item-label">Current Fellowship</div>
+          <div class="contact-item-val">ANRF National Postdoctoral Fellow<br>IIT Gandhinagar, India</div>
+        </div>
+      </div>
+    </div>
+
+    <form onsubmit="handleSubmit(event)" class="reveal">
+      <div class="form-row">
+        <input type="text" placeholder="Your name" required>
+        <input type="email" placeholder="Email address" required>
+      </div>
+      <input type="text" placeholder="Institution / Organisation">
+      <select style="color:var(--muted)">
+        <option value="" disabled selected>Nature of enquiry</option>
+        <option>Research Collaboration</option>
+        <option>Postdoctoral Opportunity</option>
+        <option>Faculty Position</option>
+        <option>Data / Sample Request</option>
+        <option>General Enquiry</option>
+      </select>
+      <textarea rows="5" placeholder="Your message..." required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div id="form-msg" style="font-size:13px;color:var(--green2);display:none">
+        ✓ Message sent — I will respond within 48 hours.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2025 Dr. Md Salim Akhtar · IIT Gandhinagar</span>
+  <span style="color:var(--accent);font-style:italic;font-family:var(--serif)">Reading Earth through Rock &amp; Fire</span>
+</footer>
+
+<script>
+  // Scroll-reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) cur = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur
+        ? 'var(--accent)' : '';
+    });
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    e.target.querySelector('button').textContent = 'Sent ✓';
+    e.target.querySelector('button').style.background = 'var(--green)';
+  }
+</script>
+</body>
+</html>
